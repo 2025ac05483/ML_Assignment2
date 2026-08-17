@@ -22,9 +22,7 @@ The dataset satisfies the assignment requirement of at least 500 instances and a
 
 ## Live Streamlit App Link
 
-Add your deployed Streamlit Community Cloud link here:
-
-`https://<your-app-name>.streamlit.app`
+`https://mlassignment2-5xuqec6rhhj3smgxcensvw.streamlit.app/`
 
 ## Models Used
 
