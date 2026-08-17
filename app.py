@@ -327,8 +327,10 @@ def main():
 
         left, right = st.columns(2)
         with left:
+            st.subheader("Confusion Matrix")
             st.pyplot(plot_confusion_matrix(y_true, predictions, target_names))
         with right:
+            st.subheader("Classification Report")
             report = classification_report(
                 y_true,
                 predictions,
