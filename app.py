@@ -23,6 +23,7 @@ from sklearn.metrics import (
 
 MODEL_DIR = Path("model")
 DEFAULT_TEST_DATA = Path("test_data.csv")
+FULL_DATASET_INSTANCE_SIZE = 569
 MODEL_OBSERVATIONS = [
     {
         "ML Model Name": "Logistic Regression",
@@ -314,9 +315,10 @@ def main():
         f"Current file: {active_dataset_name} | Rows: {len(data)} | "
         f"Selected model: {selected_model_name}"
     )
-    size_col1, size_col2 = st.columns(2)
+    size_col1, size_col2, size_col3 = st.columns(3)
     size_col1.metric("Feature Size", len(feature_names))
-    size_col2.metric("Instance Size", len(data))
+    size_col2.metric("Instance Size", FULL_DATASET_INSTANCE_SIZE)
+    size_col3.metric("Current File Rows", len(data))
 
     st.subheader("Dataset Preview")
     st.dataframe(data.head(20), width="stretch")
