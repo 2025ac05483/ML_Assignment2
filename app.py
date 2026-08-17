@@ -23,6 +23,53 @@ from sklearn.metrics import (
 
 MODEL_DIR = Path("model")
 DEFAULT_TEST_DATA = Path("test_data.csv")
+MODEL_OBSERVATIONS = [
+    {
+        "ML Model Name": "Logistic Regression",
+        "Observation about model performance": (
+            "Best overall performer on this test split, with the highest Accuracy, "
+            "AUC, F1, and MCC. It works well because the scaled features separate "
+            "the two classes clearly."
+        ),
+    },
+    {
+        "ML Model Name": "Decision Tree",
+        "Observation about model performance": (
+            "Easy to interpret, but it produced the lowest overall scores among "
+            "the implemented models. This suggests a single tree is more likely "
+            "to overfit or miss some patterns."
+        ),
+    },
+    {
+        "ML Model Name": "kNN",
+        "Observation about model performance": (
+            "Strong performance after feature scaling, especially with perfect "
+            "recall on this test split. Distance-based models need scaling to "
+            "avoid larger-valued features dominating predictions."
+        ),
+    },
+    {
+        "ML Model Name": "Naive Bayes",
+        "Observation about model performance": (
+            "Fast and simple with good AUC, but its independence assumption can "
+            "limit performance because medical features are often correlated."
+        ),
+    },
+    {
+        "ML Model Name": "Random Forest (Ensemble)",
+        "Observation about model performance": (
+            "Robust ensemble model with high AUC and balanced scores. It improves "
+            "over a single decision tree by combining many trees."
+        ),
+    },
+    {
+        "ML Model Name": "Overall Winner",
+        "Observation about model performance": (
+            "Logistic Regression is the winner for this dataset because it has "
+            "the highest Accuracy, AUC, F1, and MCC on the test split."
+        ),
+    },
+]
 
 
 def apply_custom_styles():
@@ -222,6 +269,9 @@ def main():
 
         st.subheader("Saved Model Comparison")
         st.dataframe(saved_metrics, width="stretch")
+
+        st.subheader("Model Performance Observations")
+        st.dataframe(pd.DataFrame(MODEL_OBSERVATIONS), width="stretch")
 
         left, right = st.columns(2)
         with left:
