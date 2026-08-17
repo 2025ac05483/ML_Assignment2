@@ -18,11 +18,11 @@ The dataset satisfies the assignment requirement of at least 500 instances and a
 
 ## GitHub Repository Link
 
-`https://github.com/2025ac05483/ML_Assignment2`
+[GitHub Repository](https://github.com/2025ac05483/ML_Assignment2)
 
 ## Live Streamlit App Link
 
-`https://mlassignment2-5xuqec6rhhj3smgxcensvw.streamlit.app/`
+[Live Streamlit App](https://mlassignment2-5xuqec6rhhj3smgxcensvw.streamlit.app/)
 
 ## Models Used
 
