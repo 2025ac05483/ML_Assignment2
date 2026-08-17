@@ -25,6 +25,109 @@ MODEL_DIR = Path("model")
 DEFAULT_TEST_DATA = Path("test_data.csv")
 
 
+def apply_custom_styles():
+    st.markdown(
+        """
+        <style>
+        :root {
+            --ink: #16213e;
+            --muted: #5f6c7b;
+            --blue: #2563eb;
+            --teal: #0f9f8e;
+            --coral: #ef5b5b;
+            --amber: #f59e0b;
+            --panel: #ffffff;
+            --soft-blue: #eef5ff;
+            --soft-teal: #e8fbf7;
+        }
+
+        .stApp {
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 28rem),
+                radial-gradient(circle at top right, rgba(15, 159, 142, 0.12), transparent 26rem),
+                #f7fafc;
+            color: var(--ink);
+        }
+
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #17324d 0%, #1f5f66 100%);
+        }
+
+        [data-testid="stSidebar"] * {
+            color: #f8fbff;
+        }
+
+        [data-testid="stSidebar"] label {
+            font-weight: 700;
+        }
+
+        [data-testid="stSidebar"] [data-baseweb="select"] * {
+            color: #172033;
+        }
+
+        .main .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .app-header {
+            border-left: 8px solid var(--coral);
+            background: linear-gradient(90deg, #ffffff 0%, var(--soft-blue) 50%, var(--soft-teal) 100%);
+            border-radius: 8px;
+            padding: 1.35rem 1.5rem;
+            margin-bottom: 1.3rem;
+            box-shadow: 0 10px 28px rgba(22, 33, 62, 0.08);
+        }
+
+        .app-header h1 {
+            color: var(--ink);
+            font-size: 2rem;
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        .app-header p {
+            color: var(--muted);
+            font-size: 1rem;
+            margin: 0.45rem 0 0;
+        }
+
+        h2, h3 {
+            color: var(--ink);
+        }
+
+        [data-testid="stMetric"] {
+            background: var(--panel);
+            border-top: 5px solid var(--blue);
+            border-radius: 8px;
+            padding: 0.95rem;
+            box-shadow: 0 8px 22px rgba(22, 33, 62, 0.08);
+        }
+
+        div[data-testid="stMetric"]:nth-of-type(2n) {
+            border-top-color: var(--teal);
+        }
+
+        div[data-testid="stMetric"]:nth-of-type(3n) {
+            border-top-color: var(--amber);
+        }
+
+        div[data-testid="stMetric"]:nth-of-type(4n) {
+            border-top-color: var(--coral);
+        }
+
+        [data-testid="stDataFrame"] {
+            border: 1px solid rgba(22, 33, 62, 0.10);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(22, 33, 62, 0.05);
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 @st.cache_resource
 def load_artifacts():
     metadata = joblib.load(MODEL_DIR / "metadata.joblib")
@@ -56,7 +159,7 @@ def plot_confusion_matrix(y_true, predictions, target_names):
         matrix,
         annot=True,
         fmt="d",
-        cmap="Blues",
+        cmap="YlGnBu",
         xticklabels=target_names,
         yticklabels=target_names,
         ax=ax,
@@ -69,7 +172,16 @@ def plot_confusion_matrix(y_true, predictions, target_names):
 
 def main():
     st.set_page_config(page_title="ML Assignment 2", layout="wide")
-    st.title("ML Assignment 2 - Classification Model Comparison")
+    apply_custom_styles()
+    st.markdown(
+        """
+        <div class="app-header">
+            <h1>ML Assignment 2 - Classification Model Comparison</h1>
+            <p>Compare five classification models on the Breast Cancer Wisconsin dataset.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     metadata, models, saved_metrics = load_artifacts()
     feature_names = metadata["feature_names"]
