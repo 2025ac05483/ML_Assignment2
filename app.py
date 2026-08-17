@@ -77,39 +77,72 @@ def apply_custom_styles():
         """
         <style>
         :root {
-            --ink: #16213e;
-            --muted: #5f6c7b;
-            --blue: #2563eb;
-            --teal: #0f9f8e;
-            --coral: #ef5b5b;
-            --amber: #f59e0b;
+            --ink: #152238;
+            --muted: #58677a;
+            --blue: #1d4ed8;
+            --teal: #0f766e;
+            --coral: #e11d48;
+            --amber: #d97706;
             --panel: #ffffff;
-            --soft-blue: #eef5ff;
-            --soft-teal: #e8fbf7;
+            --soft-blue: #edf4ff;
+            --soft-teal: #ecfdf5;
+            --soft-rose: #fff1f2;
         }
 
         .stApp {
             background:
-                radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 28rem),
-                radial-gradient(circle at top right, rgba(15, 159, 142, 0.12), transparent 26rem),
-                #f7fafc;
+                linear-gradient(135deg, rgba(237, 244, 255, 0.95), rgba(236, 253, 245, 0.85)),
+                #f8fafc;
             color: var(--ink);
         }
 
         [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #17324d 0%, #1f5f66 100%);
+            background: #ffffff;
+            border-right: 1px solid rgba(21, 34, 56, 0.12);
         }
 
-        [data-testid="stSidebar"] * {
-            color: #f8fbff;
+        [data-testid="stSidebar"] h2,
+        [data-testid="stSidebar"] h3,
+        [data-testid="stSidebar"] p,
+        [data-testid="stSidebar"] label {
+            color: var(--ink);
         }
 
         [data-testid="stSidebar"] label {
             font-weight: 700;
         }
 
-        [data-testid="stSidebar"] [data-baseweb="select"] * {
-            color: #172033;
+        [data-testid="stSidebar"] [data-testid="stFileUploader"] {
+            background: linear-gradient(135deg, var(--soft-blue), var(--soft-teal));
+            border: 2px dashed var(--blue);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stFileUploader"] section {
+            background: #ffffff;
+            border: 1px solid rgba(29, 78, 216, 0.20);
+            border-radius: 8px;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stFileUploader"] button {
+            background: var(--blue);
+            border: 1px solid var(--blue);
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        [data-testid="stSidebar"] [data-baseweb="select"] > div {
+            background: #ffffff;
+            border-color: rgba(29, 78, 216, 0.35);
+        }
+
+        [data-testid="stSidebar"] [data-baseweb="select"] span,
+        [data-testid="stSidebar"] [data-baseweb="select"] input,
+        [data-testid="stSidebar"] [data-baseweb="select"] svg {
+            color: var(--ink);
+            fill: var(--ink);
         }
 
         .main .block-container {
@@ -118,8 +151,8 @@ def apply_custom_styles():
         }
 
         .app-header {
-            border-left: 8px solid var(--coral);
-            background: linear-gradient(90deg, #ffffff 0%, var(--soft-blue) 50%, var(--soft-teal) 100%);
+            border-left: 8px solid var(--blue);
+            background: linear-gradient(90deg, #ffffff 0%, var(--soft-blue) 48%, var(--soft-rose) 100%);
             border-radius: 8px;
             padding: 1.35rem 1.5rem;
             margin-bottom: 1.3rem;
@@ -151,6 +184,11 @@ def apply_custom_styles():
             box-shadow: 0 8px 22px rgba(22, 33, 62, 0.08);
         }
 
+        [data-testid="stMetric"] label,
+        [data-testid="stMetric"] [data-testid="stMetricValue"] {
+            color: var(--ink);
+        }
+
         div[data-testid="stMetric"]:nth-of-type(2n) {
             border-top-color: var(--teal);
         }
@@ -168,6 +206,16 @@ def apply_custom_styles():
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(22, 33, 62, 0.05);
+        }
+
+        .sidebar-note {
+            background: #f8fafc;
+            border-left: 5px solid var(--coral);
+            border-radius: 8px;
+            color: var(--ink);
+            font-weight: 700;
+            margin: 0.35rem 0 0.75rem;
+            padding: 0.85rem 0.95rem;
         }
         </style>
         """,
@@ -236,6 +284,10 @@ def main():
     target_names = metadata["target_names"]
 
     st.sidebar.header("Input")
+    st.sidebar.markdown(
+        '<div class="sidebar-note">Upload test CSV here, then choose a model.</div>',
+        unsafe_allow_html=True,
+    )
     uploaded_file = st.sidebar.file_uploader("Upload test CSV", type=["csv"])
     selected_model_name = st.sidebar.selectbox("Select model", list(models.keys()))
 
