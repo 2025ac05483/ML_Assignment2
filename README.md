@@ -46,103 +46,24 @@ python3 train_models.py
 
 The generated comparison table is also saved at `model/metrics.csv`.
 
-<table>
-  <thead>
-    <tr>
-      <th>ML Model Name</th>
-      <th>Accuracy</th>
-      <th>AUC</th>
-      <th>Precision</th>
-      <th>Recall</th>
-      <th>F1</th>
-      <th>MCC</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Logistic Regression</td>
-      <td>0.9825</td>
-      <td>0.9954</td>
-      <td>0.9861</td>
-      <td>0.9861</td>
-      <td>0.9861</td>
-      <td>0.9623</td>
-    </tr>
-    <tr>
-      <td>Decision Tree</td>
-      <td>0.9035</td>
-      <td>0.9358</td>
-      <td>0.9420</td>
-      <td>0.9028</td>
-      <td>0.9220</td>
-      <td>0.7969</td>
-    </tr>
-    <tr>
-      <td>kNN</td>
-      <td>0.9737</td>
-      <td>0.9884</td>
-      <td>0.9600</td>
-      <td>1.0000</td>
-      <td>0.9796</td>
-      <td>0.9442</td>
-    </tr>
-    <tr>
-      <td>Naive Bayes</td>
-      <td>0.9386</td>
-      <td>0.9878</td>
-      <td>0.9452</td>
-      <td>0.9583</td>
-      <td>0.9517</td>
-      <td>0.8676</td>
-    </tr>
-    <tr>
-      <td>Random Forest (Ensemble)</td>
-      <td>0.9561</td>
-      <td>0.9944</td>
-      <td>0.9589</td>
-      <td>0.9722</td>
-      <td>0.9655</td>
-      <td>0.9054</td>
-    </tr>
-  </tbody>
-</table>
+| Model | Accuracy | AUC | Precision | Recall | F1 | MCC |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Logistic Regression | 0.9825 | 0.9954 | 0.9861 | 0.9861 | 0.9861 | 0.9623 |
+| Decision Tree | 0.9035 | 0.9358 | 0.9420 | 0.9028 | 0.9220 | 0.7969 |
+| kNN | 0.9737 | 0.9884 | 0.9600 | 1.0000 | 0.9796 | 0.9442 |
+| Naive Bayes | 0.9386 | 0.9878 | 0.9452 | 0.9583 | 0.9517 | 0.8676 |
+| Random Forest | 0.9561 | 0.9944 | 0.9589 | 0.9722 | 0.9655 | 0.9054 |
 
 ## Observations About Model Performance
 
-<table>
-  <thead>
-    <tr>
-      <th>ML Model Name</th>
-      <th>Observation about model performance</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Logistic Regression</td>
-      <td>Usually performs very well on this dataset because the features are informative and mostly separable after scaling.</td>
-    </tr>
-    <tr>
-      <td>Decision Tree</td>
-      <td>Easy to interpret, but can overfit if the tree is allowed to grow too deep. A controlled depth improves generalization.</td>
-    </tr>
-    <tr>
-      <td>kNN</td>
-      <td>Performs well when features are scaled because distance-based learning is sensitive to feature magnitude.</td>
-    </tr>
-    <tr>
-      <td>Naive Bayes</td>
-      <td>Fast and simple. It can perform strongly, but its independence assumption may limit performance on correlated medical features.</td>
-    </tr>
-    <tr>
-      <td>Random Forest (Ensemble)</td>
-      <td>Generally robust because it combines many decision trees and reduces the overfitting risk of a single tree.</td>
-    </tr>
-    <tr>
-      <td>Overall Winner</td>
-      <td>Logistic Regression is the overall winner because it has the highest Accuracy, AUC, F1, and MCC on the test split.</td>
-    </tr>
-  </tbody>
-</table>
+| Model | Observation |
+| --- | --- |
+| Logistic Regression | Best overall result; features separate well after scaling. |
+| Decision Tree | Interpretable, but weaker than the other models on this split. |
+| kNN | Strong performance after scaling, with perfect recall. |
+| Naive Bayes | Fast and simple, but affected by correlated medical features. |
+| Random Forest | Robust ensemble model with balanced performance. |
+| Overall Winner | Logistic Regression, because it has the highest Accuracy, AUC, F1, and MCC. |
 
 ## How To Run Locally
 
