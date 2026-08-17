@@ -293,8 +293,12 @@ def main():
 
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file)
+        active_dataset_name = uploaded_file.name
+        st.sidebar.success(f"Using uploaded file: {active_dataset_name}")
     else:
         data = pd.read_csv(DEFAULT_TEST_DATA)
+        active_dataset_name = DEFAULT_TEST_DATA.name
+        st.sidebar.info(f"Using default file: {active_dataset_name}")
 
     missing_features = [feature for feature in feature_names if feature not in data.columns]
     if missing_features:
@@ -305,6 +309,12 @@ def main():
     selected_model = models[selected_model_name]
     predictions = selected_model.predict(x_data)
 
+    st.subheader("Active Dataset")
+    st.caption(
+        f"Current file: {active_dataset_name} | Rows: {len(data)} | "
+        f"Selected model: {selected_model_name}"
+    )
+
     st.subheader("Dataset Preview")
     st.dataframe(data.head(20), width="stretch")
 
@@ -312,6 +322,7 @@ def main():
         y_true = data[target_column]
         selected_metrics, predictions = evaluate(selected_model, x_data, y_true)
 
+        st.subheader("Current Dataset Metrics")
         col1, col2, col3, col4, col5, col6 = st.columns(6)
         metric_columns = [col1, col2, col3, col4, col5, col6]
         for column, (metric_name, metric_value) in zip(
@@ -319,7 +330,7 @@ def main():
         ):
             column.metric(metric_name, f"{metric_value:.4f}")
 
-        st.subheader("Saved Model Comparison")
+        st.subheader("Saved Model Comparison From Original Test Split")
         st.dataframe(saved_metrics, width="stretch")
 
         st.subheader("Model Performance Observations")
