@@ -1,5 +1,10 @@
 # ML Assignment 2 - Classification Model Comparison
 
+## Student Details
+
+- Name: CHITRA V
+- BITS ID: 2025ac05483
+
 ## Problem Statement
 
 The objective of this project is to build, evaluate, compare, and deploy multiple machine learning classification models on a single public classification dataset. The final solution includes trained models, test data, a Streamlit web app, and model performance observations.
