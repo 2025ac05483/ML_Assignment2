@@ -330,7 +330,7 @@ def main():
         ):
             column.metric(metric_name, f"{metric_value:.4f}")
 
-        st.subheader("Saved Model Comparison From Original Test Split")
+        st.subheader("Model Comparison")
         st.dataframe(saved_metrics, width="stretch")
 
         st.subheader("Model Performance Observations")
