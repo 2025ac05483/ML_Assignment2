@@ -314,6 +314,9 @@ def main():
         f"Current file: {active_dataset_name} | Rows: {len(data)} | "
         f"Selected model: {selected_model_name}"
     )
+    size_col1, size_col2 = st.columns(2)
+    size_col1.metric("Feature Size", len(feature_names))
+    size_col2.metric("Instance Size", len(data))
 
     st.subheader("Dataset Preview")
     st.dataframe(data.head(20), width="stretch")
